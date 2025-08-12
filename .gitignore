@@ -1,0 +1,41 @@
+# Ignore Python bytecode
+__pycache__/
+*.py[cod]
+
+# Ignore virtual environments
+venv/
+ENV/
+env/
+.venv/
+.ENV/
+.env/
+.env
+.dockerignore
+
+# Ignore Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Ignore mypy cache
+.mypy_cache/
+
+# Ignore pytest cache
+.pytest_cache/
+
+# Ignore coverage reports
+htmlcov/
+.coverage
+.coverage.*
+
+# Ignore local configuration files
+*.local
+
+# Ignore other common files
+*.log
+*.tmp
+*.swp
+*dump*
+.DS_Store
+
+# Airflow
+*/logs*
+*/plugins*
