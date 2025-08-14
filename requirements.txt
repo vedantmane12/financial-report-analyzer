@@ -20,3 +20,4 @@ typing-extensions
 yfinance
 spacy
 plotly
+pillow
