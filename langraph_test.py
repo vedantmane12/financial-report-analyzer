@@ -11,34 +11,34 @@ def format_report(report_str):
             report = report_str
             
         print("\n" + "="*80)
-        print("FINANCIAL RESEARCH REPORT")
+        print("# FINANCIAL RESEARCH REPORT")
         print("="*80)
         
-        print("\n“Š RESEARCH STEPS:")
+        print("\n## RESEARCH STEPS:")
         print("-" * 40)
         print(report.get('research_steps', 'N/A'))
         
-        print("\n’¹ KEY METRICS:")
+        print("\n## KEY METRICS:")
         print("-" * 40)
         print(report.get('key_metrics', 'N/A'))
         
-        print("\n“ˆ FINANCIAL ANALYSIS:")
+        print("\n## FINANCIAL ANALYSIS:")
         print("-" * 40)
         print(report.get('financial_analysis', 'N/A'))
         
-        print("\n“‰ REAL-TIME MARKET DATA:")
+        print("\n## REAL-TIME MARKET DATA:")
         print("-" * 40)
         print(report.get('real_time_data', 'N/A'))
         
-        print("\nŒ MARKET INSIGHTS:")
+        print("\n## MARKET INSIGHTS:")
         print("-" * 40)
         print(report.get('market_insights', 'N/A'))
         
-        print("\n“ EXECUTIVE SUMMARY:")
+        print("\n## EXECUTIVE SUMMARY:")
         print("-" * 40)
         print(report.get('summary', 'N/A'))
         
-        print("\n”— SOURCES:")
+        print("\n## SOURCES:")
         print("-" * 40)
         print(report.get('sources', 'N/A'))
         
@@ -87,11 +87,11 @@ def main():
     # Select which query to run (change index to test different queries)
     test_query = queries[0]  # Change this index to test different queries
     
-    print(f"\n” Query: {test_query['query']}")
-    print(f"“… Year: {test_query.get('year', 'All')}")
-    print(f"“Š Quarter(s): {test_query.get('quarter', 'All')}")
-    print(f"¢ Organization(s): {test_query.get('org', 'All')}")
-    print(f"› ï¸ Tools: {test_query.get('tools', ['vector_search', 'web_search', 'yfinance_analysis'])}")
+    print(f"\n### Query: {test_query['query']}")
+    print(f"### Year: {test_query.get('year', 'All')}")
+    print(f"### Quarter(s): {test_query.get('quarter', 'All')}")
+    print(f"### Organization(s): {test_query.get('org', 'All')}")
+    print(f"### Tools: {test_query.get('tools', ['vector_search', 'web_search', 'yfinance_analysis'])}")
     print("\nStarting research...\n")
     
     # Run the agent with specified tools
@@ -118,7 +118,7 @@ def main():
     
     # Show if charts were generated
     if result.get("charts"):
-        print("\n“Š Visualizations generated (stored in state)")
+        print("\n#### Visualizations generated (stored in state)")
 
 def test_individual_tools():
     """Test individual tools to ensure they work correctly"""
@@ -133,12 +133,12 @@ def test_individual_tools():
     try:
         web_result = web_search.invoke({"query": "NVIDIA earnings Q4 2024"})
         if web_result and "Error" not in web_result:
-            print("âœ… Web search working")
+            print("#### Web search working")
             print(f"   Preview: {web_result[:200]}...")
         else:
-            print("âŒ Web search failed:", web_result)
+            print("#### Web search failed:", web_result)
     except Exception as e:
-        print("âŒ Web search error:", e)
+        print("#### Web search error:", e)
     
     # Test vector search
     print("\n2. Testing Vector Search...")
@@ -150,12 +150,12 @@ def test_individual_tools():
             "org": ["NVIDIA"]
         })
         if vector_result and "No relevant" not in vector_result:
-            print("âœ… Vector search working")
+            print("#### Vector search working")
             print(f"   Found {vector_result.count('Chunk')} chunks")
         else:
-            print("âŒ Vector search failed:", vector_result)
+            print("#### Vector search failed:", vector_result)
     except Exception as e:
-        print("âŒ Vector search error:", e)
+        print("#### Vector search error:", e)
     
     # Test YFinance
     print("\n3. Testing YFinance Analysis...")
@@ -168,16 +168,16 @@ def test_individual_tools():
             "analysis_type": "comprehensive"
         })
         if yfinance_result and "Error" not in yfinance_result:
-            print("âœ… YFinance analysis working")
+            print("#### YFinance analysis working")
             if "MARKET DATA SUMMARY" in yfinance_result:
-                print("   âœ“ Market data retrieved")
+                print("#### Market data retrieved")
             if "REAL-TIME METRICS" in yfinance_result:
-                print("   âœ“ Real-time metrics calculated")
+                print("#### Real-time metrics calculated")
             print(f"   Preview: {yfinance_result[:200]}...")
         else:
-            print("âŒ YFinance analysis failed:", yfinance_result)
+            print("#### YFinance analysis failed:", yfinance_result)
     except Exception as e:
-        print("âŒ YFinance error:", e)
+        print("#### YFinance error:", e)
     
     print("\n" + "="*50)
 
