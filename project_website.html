@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial Report Analyzer - AI-Powered Financial Intelligence</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+        }
+
+        .hero {
+            padding: 120px 0 80px;
+            text-align: center;
+            color: white;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            opacity: 0;
+            animation: fadeInUp 1s forwards;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeInUp 1s 0.3s forwards;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            opacity: 0;
+            animation: fadeInUp 1s 0.6s forwards;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: #fff;
+            color: #667eea;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: #667eea;
+        }
+
+        .features {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .demo-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+
+        .demo-video {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .demo-placeholder {
+            background: #e9ecef;
+            height: 400px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 2rem 0;
+            color: #6c757d;
+            font-size: 1.2rem;
+        }
+
+        .tech-stack {
+            padding: 80px 0;
+            background: #2c3e50;
+            color: white;
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .tech-item {
+            text-align: center;
+            padding: 1.5rem;
+        }
+
+        .tech-logo {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .metrics {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .metric-card {
+            text-align: center;
+            padding: 2rem;
+            background: #f8f9fa;
+            border-radius: 15px;
+        }
+
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .metric-label {
+            color: #6c757d;
+            margin-top: 0.5rem;
+        }
+
+        .footer {
+            background: #333;
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: #667eea;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: #6c757d;
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+        }
+
+        .architecture-diagram {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .flow-diagram {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            margin: 2rem 0;
+        }
+
+        .flow-step {
+            background: #667eea;
+            color: white;
+            padding: 1rem;
+            border-radius: 10px;
+            margin: 0.5rem;
+            min-width: 120px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .flow-arrow {
+            font-size: 1.5rem;
+            color: #667eea;
+            margin: 0 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <div class="logo">📊 Financial Report Analyzer</div>
+                <ul class="nav-links">
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#demo">Demo</a></li>
+                    <li><a href="#tech">Technology</a></li>
+                    <li><a href="#metrics">Performance</a></li>
+                    <li><a href="https://github.com/vedantmane12/financial-report-analyzer" target="_blank">GitHub</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>AI-Powered Financial Intelligence</h1>
+            <p>Comprehensive financial analysis combining quarterly reports, real-time market data, and AI-driven insights</p>
+            <div class="cta-buttons">
+                <a href="https://github.com/vedantmane12/financial-report-analyzer" class="btn btn-primary" target="_blank">View on GitHub</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="features" id="features">
+        <div class="container">
+            <h2 class="section-title">Powerful Features</h2>
+            <p class="section-subtitle">Advanced AI agents working together to deliver comprehensive financial analysis</p>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <h3>Multi-Agent AI System</h3>
+                    <p>LangGraph orchestrates specialized AI agents for intelligent query routing and comprehensive analysis</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">📈</div>
+                    <h3>Real-Time Market Data</h3>
+                    <p>Live stock prices, market caps, P/E ratios, and financial metrics from Yahoo Finance API</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Historical Analysis</h3>
+                    <p>Semantic search through 2023-2025 quarterly earnings reports stored in Pinecone vector database</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🌐</div>
+                    <h3>Market Intelligence</h3>
+                    <p>Current news, trends, and analyst insights gathered through advanced web search capabilities</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">📋</div>
+                    <h3>Structured Reports</h3>
+                    <p>Professional financial reports with clean tables, formatted metrics, and comprehensive analysis</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Fast & Reliable</h3>
+                    <p>Sub-60 second response times with 95%+ success rate and comprehensive error handling</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="demo-section" id="demo">
+        <div class="container">
+            <h2 class="section-title">System Architecture</h2>
+            <p class="section-subtitle">Multi-layered architecture combining modern AI with robust data infrastructure</p>
+            
+            <div class="architecture-diagram">
+                <h3>Data Flow Architecture</h3>
+                <div class="flow-diagram">
+                    <div class="flow-step">User Query</div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-step">FastAPI</div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-step">LangGraph Oracle</div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-step">AI Agents</div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-step">Structured Report</div>
+                </div>
+                
+                <div style="margin: 2rem 0;">
+                    <h4>Data Sources Integration</h4>
+                    <div style="display: flex; justify-content: space-around; margin-top: 1rem;">
+                        <div style="text-align: center;">
+                            <div style="background: #e3f2fd; padding: 1rem; border-radius: 10px; margin-bottom: 0.5rem;">📊 Pinecone</div>
+                            <small>Historical Reports</small>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="background: #f3e5f5; padding: 1rem; border-radius: 10px; margin-bottom: 0.5rem;">📈 YFinance</div>
+                            <small>Real-time Data</small>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="background: #e8f5e8; padding: 1rem; border-radius: 10px; margin-bottom: 0.5rem;">🌐 SerpAPI</div>
+                            <small>Market News</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="demo-video">
+                <h3>Interactive Demo Video</h3>
+                <div class="demo-placeholder">
+                    🎥 <a href="https://northeastern-my.sharepoint.com/:v:/g/personal/kamble_ma_northeastern_edu/ER32p4GWfalNkvh2TaSHLR0BlNnIS0ga1kF3Yjn7o3oWhw?e=CkrQ6Z" target="_blank" style="color: #667eea; text-decoration: none; font-weight: bold;">Interactive Demo Video</a><br>
+                    <small>Watch comprehensive financial analysis in action</small>
+                </div>
+                <p><strong>Click above to watch:</strong> Complete system demonstration with live financial analysis</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="tech-stack" id="tech">
+        <div class="container">
+            <h2 class="section-title" style="color: white;">Technology Stack</h2>
+            <p class="section-subtitle" style="color: #bdc3c7;">Built with cutting-edge AI and modern web technologies</p>
+            
+            <div class="tech-grid">
+                <div class="tech-item">
+                    <div class="tech-logo">🧠</div>
+                    <h3>LangGraph</h3>
+                    <p>Multi-agent AI orchestration</p>
+                </div>
+                
+                <div class="tech-item">
+                    <div class="tech-logo">⚡</div>
+                    <h3>FastAPI</h3>
+                    <p>High-performance API framework</p>
+                </div>
+                
+                <div class="tech-item">
+                    <div class="tech-logo">🎨</div>
+                    <h3>Streamlit</h3>
+                    <p>Interactive web interface</p>
+                </div>
+                
+                <div class="tech-item">
+                    <div class="tech-logo">🔍</div>
+                    <h3>Pinecone</h3>
+                    <p>Vector database for embeddings</p>
+                </div>
+                
+                <div class="tech-item">
+                    <div class="tech-logo">🤖</div>
+                    <h3>OpenAI GPT-4</h3>
+                    <p>Advanced language model</p>
+                </div>
+                
+                <div class="tech-item">
+                    <div class="tech-logo">☁️</div>
+                    <h3>AWS S3</h3>
+                    <p>Document storage and management</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="metrics" id="metrics">
+        <div class="container">
+            <h2 class="section-title">Performance Metrics</h2>
+            <p class="section-subtitle">Real-world performance data from comprehensive testing</p>
+            
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-value">18.2s</div>
+                    <div class="metric-label">Average Response Time</div>
+                </div>
+                
+                <div class="metric-card">
+                    <div class="metric-value">95%</div>
+                    <div class="metric-label">Success Rate</div>
+                </div>
+                
+                <div class="metric-card">
+                    <div class="metric-value">87%</div>
+                    <div class="metric-label">Data Relevance</div>
+                </div>
+                
+                <div class="metric-card">
+                    <div class="metric-value">3</div>
+                    <div class="metric-label">Data Sources</div>
+                </div>
+                
+                <div class="metric-card">
+                    <div class="metric-value">1200+</div>
+                    <div class="metric-label">Document Chunks</div>
+                </div>
+                
+                <div class="metric-card">
+                    <div class="metric-value">36</div>
+                    <div class="metric-label">Quarterly Reports</div>
+                </div>
+            </div>
+
+            <div style="margin-top: 3rem; text-align: center;">
+                <h3>Sample Analysis Results</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem;">
+                    <div style="background: #f8f9fa; padding: 2rem; border-radius: 15px;">
+                        <h4>NVIDIA Q3 2024</h4>
+                        <p><strong>Revenue:</strong> $18.12B (↑206% YoY)</p>
+                        <p><strong>Net Income:</strong> $10.42B</p>
+                        <p><strong>Current Price:</strong> ~$179</p>
+                        <p><strong>Market Cap:</strong> $4.36T</p>
+                    </div>
+                    
+                    <div style="background: #f8f9fa; padding: 2rem; border-radius: 15px;">
+                        <h4>AMD Q3 2024</h4>
+                        <p><strong>Revenue:</strong> $6.8B</p>
+                        <p><strong>Gross Margin:</strong> 50%</p>
+                        <p><strong>Current Price:</strong> ~$177</p>
+                        <p><strong>Market Cap:</strong> $287B</p>
+                    </div>
+                    
+                    <div style="background: #f8f9fa; padding: 2rem; border-radius: 15px;">
+                        <h4>Intel Q3 2024</h4>
+                        <p><strong>Revenue:</strong> $13.3B (↓6% YoY)</p>
+                        <p><strong>Net Loss:</strong> $16.6B</p>
+                        <p><strong>Current Price:</strong> ~$25</p>
+                        <p><strong>Market Cap:</strong> $110B</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section style="padding: 80px 0; background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);">
+        <div class="container">
+            <h2 class="section-title">Key Features Showcase</h2>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 3rem; margin-top: 3rem;">
+                <div>
+                    <h3>🤖 Intelligent Query Processing</h3>
+                    <ul style="list-style: none; padding: 0; margin-top: 1rem;">
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid #eee;">✅ Natural language understanding</li>
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid #eee;">✅ Context-aware tool routing</li>
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid #eee;">✅ Multi-step reasoning</li>
+                        <li style="padding: 0.5rem 0;">✅ Comprehensive report generation</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3>📊 Advanced Data Processing</h3>
+                    <ul style="list-style: none; padding: 0; margin-top: 1rem;">
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid #eee;">✅ Structured table extraction</li>
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid #eee;">✅ Text cleaning and formatting</li>
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid #eee;">✅ Financial metric calculation</li>
+                        <li style="padding: 0.5rem 0;">✅ Multi-company comparison</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-links">
+                <a href="https://github.com/vedantmane12/financial-report-analyzer" target="_blank">GitHub Repository</a>
+                <a href="https://www.notion.so/Final-Project-250a1b039ae7803a872cfad6903157fc" target="_blank">Technical Documentation</a>
+                <a href="http://localhost:8000/docs" target="_blank">API Docs</a>
+                <a href="http://localhost:8501" target="_blank">Live Demo</a>
+            </div>
+            <p>&copy; 2025 Financial Report Analyzer. Built for INFO7375 Final Project.</p>
+            <p style="margin-top: 0.5rem; color: #999; font-size: 0.9rem;">
+                Leveraging AI for intelligent financial analysis • Educational use only • Not financial advice
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add loading animation for demo link
+        document.querySelector('a[href="http://localhost:8501"]').addEventListener('click', function(e) {
+            this.innerHTML = 'Loading Demo...';
+            setTimeout(() => {
+                this.innerHTML = 'Launch Interactive Demo';
+            }, 2000);
+        });
+
+        // Simple analytics tracking
+        function trackClick(element, action) {
+            console.log('User action:', action);
+            // In production, this would send to analytics service
+        }
+
+        // Add click tracking to CTA buttons
+        document.querySelectorAll('.btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                trackClick(this, this.textContent);
+            });
+        });
+
+        // Header transparency on scroll
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.98)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+            }
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements for scroll animations
+        document.querySelectorAll('.feature-card, .metric-card, .tech-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
